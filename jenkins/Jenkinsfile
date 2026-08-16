@@ -1,28 +1,26 @@
-pipeline {
-    agent any
+pipeline
+{
 
-    tools {
-        jdk 'jdk25.0.4'
-        maven 'Maven3'
-    }
+agent any
+stages{
 
-    stages {
-        stage('Build') {
-            steps {
-                bat 'mvn clean package'
-            }
+    stage('build')
+    {
+        steps {
+            echo "this is build stage"
         }
     }
-
-    post {
-        always {
-            echo 'Pipeline finished'
-        }
-        success {
-            echo 'Build succeeded'
-        }
-        failure {
-            echo 'Build failed'
+    stage('test')
+    {
+        steps {
+             echo " this is test stage"
         }
     }
+     stage("deploy")
+    {
+        steps{
+            echo "this is deploy stage"
+       }
+    }
+}
 }
