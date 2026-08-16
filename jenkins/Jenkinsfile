@@ -7,14 +7,22 @@ pipeline {
     }
 
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                // WRONG on Windows:
-                // sh 'mvn clean package'
-
-                // CORRECT on Windows:
                 bat 'mvn clean package'
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished'
+        }
+        success {
+            echo 'Build succeeded'
+        }
+        failure {
+            echo 'Build failed'
         }
     }
 }
